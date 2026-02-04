@@ -1,0 +1,73 @@
+# Model weights and checkpoints
+*.pt
+*.pth
+*.bin
+*.onnx
+*.safetensors
+
+# Serialized sklearn/pickle models
+*.pkl
+*.pickle
+*.joblib
+
+# Dataset directories (re-downloadable via download_data.py)
+QEvasion/
+QEvasion_augmented*/
+cache/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# IDE and editor files
+.claude/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Training logs and outputs
+*.log
+train_*.log
+
+# Prediction outputs and submissions
+prediction
+prediction_*
+submission_*.zip
+
+# Analysis artifacts
+bert_error_analysis.csv
+high_confidence_errors.csv
+bert_error_summary.txt
+
+# Hyperparameter search results
+search_results/
+
+# Evaluation submissions
+eval_submissions/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+*.env
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+
