@@ -1,4 +1,4 @@
-# SemEval 2026 Task 6 - CLARITY
+# Duluth at SemEval 2026 Task 6 - CLARITY
 
 Political Question Evasion Detection: classifying Q&A responses from political interviews by their level of clarity.
 
