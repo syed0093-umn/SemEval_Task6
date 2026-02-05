@@ -22,7 +22,6 @@ __pycache__/
 *.pyo
 
 # IDE and editor files
-.claude/
 .vscode/
 .idea/
 *.swp
