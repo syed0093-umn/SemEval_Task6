@@ -53,14 +53,14 @@ for pred_file in PREDICTION_FILES:
 if len(available_files) == 0:
  print("\n ERROR: No prediction files found!")
  print("Train at least one model first:")
- print(" - ./run_subtask2_evasion.sh (single-task)")
- print(" - ./run_multitask_evasion.sh (multi-task)")
+ print(" - scripts/run_subtask2_evasion.sh (single-task)")
+ print(" - scripts/run_multitask_evasion.sh (multi-task)")
  exit(1)
 
 if len(available_files) == 1:
  print("\n⚠ WARNING: Only 1 model found. Ensemble needs ≥2 models.")
  print("Recommend training:")
- print(" - Multi-task model: ./run_multitask_evasion.sh")
+ print(" - Multi-task model: scripts/run_multitask_evasion.sh")
  print("\nProceeding with single model (no ensemble benefit)...")
 
 num_samples = len(all_predictions[available_files[0]])
@@ -174,7 +174,7 @@ elif len(available_files) == 2:
 else:
  print("\n⚠ Only 1 model. No ensemble benefit.")
  print(" Train more models first:")
- print(" - Multi-task: ./run_multitask_evasion.sh")
+ print(" - Multi-task: scripts/run_multitask_evasion.sh")
  print(" - Hierarchical: python3 predict_hierarchical_evasion.py")
 
 print("\nNext steps:")

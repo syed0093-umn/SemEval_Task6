@@ -15,7 +15,7 @@ fi
 
 # Step 2: Train DeBERTa-large on augmented data + predict eval
 echo "Training DeBERTa-v3-large on augmented data..."
-python3 train_deberta_large_evasion_augmented.py \
+python3 training/train_deberta_large_evasion_augmented.py \
     --data_dir ./QEvasion_evasion_augmented \
     --learning_rate 2e-5 \
     --batch_size 4 \

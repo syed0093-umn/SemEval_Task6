@@ -1,7 +1,7 @@
 #!/bin/bash
 # Subtask 2: DeBERTa-v3-LARGE for 9-Class Evasion Prediction
 
-python3 train_deberta_large_evasion.py \
+python3 training/train_deberta_large_evasion.py \
     --learning_rate 2e-5 \
     --batch_size 4 \
     --gradient_accumulation_steps 8 \

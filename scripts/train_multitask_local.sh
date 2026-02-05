@@ -4,7 +4,7 @@
 # Check GPU
 python3 -c "import torch; print(f'CUDA: {torch.cuda.is_available()}, GPU: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else \"None\"}')"
 
-python3 train_multitask_deberta.py \
+python3 training/train_multitask_deberta.py \
   --learning_rate 2e-5 \
   --batch_size 8 \
   --gradient_accumulation_steps 4 \

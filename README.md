@@ -20,36 +20,46 @@ This repository contains our system for [SemEval 2026 Task 6 (CLARITY)](https://
 | BERT-base | 0.56 | |
 | **DeBERTa-v3-base (improved)** | **0.61** | Best model, rank 17/40 |
 
-See [EXPERIMENTAL_LOG.md](EXPERIMENTAL_LOG.md) for the full experiment history and [ANALYSIS_INSIGHTS.md](ANALYSIS_INSIGHTS.md) for BERT error analysis.
+See [docs/EXPERIMENTAL_LOG.md](docs/EXPERIMENTAL_LOG.md) for the full experiment history and [docs/ANALYSIS_INSIGHTS.md](docs/ANALYSIS_INSIGHTS.md) for BERT error analysis.
 
 ## Repository Structure
 
 ```
 .
-├── train_deberta_improved.py          # Best model: DeBERTa-v3-base with LLRD + cosine scheduling
-├── train_deberta.py                   # Base DeBERTa-v3 training
-├── train_deberta_large.py             # DeBERTa-v3-LARGE variant
-├── train_deberta_augmented.py         # Training with augmented data
-├── train_deberta_focal_features.py    # Focal loss + boolean features
-├── train_deberta_large_evasion.py     # 9-class subtask (DeBERTa-LARGE)
-├── train_multitask_deberta.py         # Multi-task learning (3-class + 9-class)
-├── train_multitask_large_evasion.py   # Multi-task with DeBERTa-LARGE
-├── train_modernbert_clarity.py        # ModernBERT alternative
-├── train_annotator_aware.py           # Annotator-aware features
-├── train_hierarchical_stage2.py       # Hierarchical two-stage classification
-├── baseline_tfidf.py                  # TF-IDF + Logistic Regression baseline
-├── baseline_svm.py                    # SVM baseline
-├── predict_*.py                       # Prediction and evaluation scripts
-├── create_ensemble*.py                # Ensemble methods
-├── data_augmentation/                 # Data augmentation pipeline
-│   ├── augmenters.py                  # EDA, back-translation, LLM paraphrasing
-│   ├── generate_synthetic_data.py     # Subtask 1 augmentation
-│   └── generate_evasion_data.py       # Subtask 2 augmentation
-├── download_data.py                   # Download QEvasion dataset
-├── scoring.py                         # Competition scoring script
-├── error_analysis.py                  # BERT error analysis
-├── EXPERIMENTAL_LOG.md                # Experiment tracking
-└── ANALYSIS_INSIGHTS.md               # Error analysis findings
+├── training/                              # Model training scripts
+│   ├── train_deberta_improved.py          # Best model: DeBERTa-v3-base with LLRD + cosine scheduling
+│   ├── train_deberta.py                   # Base DeBERTa-v3 training
+│   ├── train_deberta_large.py             # DeBERTa-v3-LARGE variant
+│   ├── train_deberta_augmented.py         # Training with augmented data
+│   ├── train_deberta_focal_features.py    # Focal loss + boolean features
+│   ├── train_deberta_large_evasion.py     # 9-class subtask (DeBERTa-LARGE)
+│   ├── train_multitask_deberta.py         # Multi-task learning (3-class + 9-class)
+│   ├── train_multitask_large_evasion.py   # Multi-task with DeBERTa-LARGE
+│   ├── train_modernbert_clarity.py        # ModernBERT alternative
+│   ├── train_annotator_aware.py           # Annotator-aware features
+│   └── train_hierarchical_stage2.py       # Hierarchical two-stage classification
+├── evaluation/                            # Prediction and evaluation
+│   ├── predict_*.py                       # Prediction and evaluation scripts
+│   ├── create_ensemble*.py                # Ensemble methods
+│   └── ensemble_models.py                 # Traditional ML ensembles (RF, XGBoost)
+├── baselines/                             # Baseline models
+│   ├── baseline_tfidf.py                  # TF-IDF + Logistic Regression
+│   ├── baseline_svm.py                    # SVM variants
+│   └── transformer_models.py              # BERT / DistilBERT baselines
+├── utils/                                 # Utilities
+│   ├── download_data.py                   # Download QEvasion dataset
+│   ├── scoring.py                         # Competition scoring script
+│   ├── error_analysis.py                  # BERT error analysis
+│   └── load_data.py                       # Dataset inspection
+├── data_augmentation/                     # Data augmentation pipeline
+│   ├── augmenters.py                      # EDA, back-translation, LLM paraphrasing
+│   ├── generate_synthetic_data.py         # Subtask 1 augmentation
+│   └── generate_evasion_data.py           # Subtask 2 augmentation
+├── scripts/                               # Shell scripts for training pipelines
+├── docs/                                  # Documentation
+│   ├── EXPERIMENTAL_LOG.md                # Experiment tracking
+│   └── ANALYSIS_INSIGHTS.md               # Error analysis findings
+└── QEvasion/                              # Dataset (gitignored, download via utils/download_data.py)
 ```
 
 ## Setup
@@ -66,7 +76,7 @@ pip install -r requirements.txt
 ### Download Data
 
 ```bash
-python download_data.py
+python utils/download_data.py
 ```
 
 This downloads the [QEvasion dataset](https://huggingface.co/datasets/ailsntua/QEvasion) from HuggingFace to `./QEvasion/`.
@@ -76,7 +86,7 @@ This downloads the [QEvasion dataset](https://huggingface.co/datasets/ailsntua/Q
 ### Best Model (DeBERTa-v3-base with advanced optimization)
 
 ```bash
-python train_deberta_improved.py \
+python training/train_deberta_improved.py \
     --learning_rate 3e-5 \
     --llrd_alpha 0.9 \
     --warmup_ratio 0.15 \
@@ -88,13 +98,13 @@ python train_deberta_improved.py \
 ### DeBERTa-v3-LARGE
 
 ```bash
-python train_deberta_large.py
+python training/train_deberta_large.py
 ```
 
 ### Subtask 2 (9-class evasion)
 
 ```bash
-python train_deberta_large_evasion.py
+python training/train_deberta_large_evasion.py
 ```
 
 ### Data Augmentation
@@ -106,7 +116,7 @@ Generate synthetic training data to address class imbalance:
 python data_augmentation/generate_synthetic_data.py --method hybrid --output_dir ./QEvasion_augmented
 
 # Train on augmented data
-python train_deberta_augmented.py --data_dir ./QEvasion_augmented
+python training/train_deberta_augmented.py --data_dir ./QEvasion_augmented
 ```
 
 ## Key Techniques
@@ -135,3 +145,4 @@ This project is released for research and educational purposes.
 - SemEval 2026 Task 6 organizers
 - [QEvasion dataset](https://huggingface.co/datasets/ailsntua/QEvasion) by Kalouli et al.
 - Microsoft for the [DeBERTa-v3](https://huggingface.co/microsoft/deberta-v3-base) model
+

@@ -5,7 +5,7 @@ mkdir -p search_results
 
 # Config 1: LR=2e-5
 echo "[1/5] LR=2e-5..."
-python3 train_deberta_improved.py \
+python3 training/train_deberta_improved.py \
   --learning_rate 2e-5 \
   --llrd_alpha 0.9 \
   --warmup_ratio 0.15 \
@@ -16,7 +16,7 @@ python3 train_deberta_improved.py \
 
 # Config 2: LR=3e-5
 echo "[2/5] LR=3e-5..."
-python3 train_deberta_improved.py \
+python3 training/train_deberta_improved.py \
   --learning_rate 3e-5 \
   --llrd_alpha 0.9 \
   --warmup_ratio 0.15 \
@@ -27,7 +27,7 @@ python3 train_deberta_improved.py \
 
 # Config 3: LR=5e-5
 echo "[3/5] LR=5e-5..."
-python3 train_deberta_improved.py \
+python3 training/train_deberta_improved.py \
   --learning_rate 5e-5 \
   --llrd_alpha 0.9 \
   --warmup_ratio 0.15 \
@@ -38,7 +38,7 @@ python3 train_deberta_improved.py \
 
 # Config 4: LR=3e-5 with stronger LLRD
 echo "[4/5] LR=3e-5, LLRD=0.85..."
-python3 train_deberta_improved.py \
+python3 training/train_deberta_improved.py \
   --learning_rate 3e-5 \
   --llrd_alpha 0.85 \
   --warmup_ratio 0.20 \
@@ -49,7 +49,7 @@ python3 train_deberta_improved.py \
 
 # Config 5: LR=3e-5 with layer reinit
 echo "[5/5] LR=3e-5, reinit=1..."
-python3 train_deberta_improved.py \
+python3 training/train_deberta_improved.py \
   --learning_rate 3e-5 \
   --llrd_alpha 0.9 \
   --warmup_ratio 0.15 \

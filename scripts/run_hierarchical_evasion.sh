@@ -18,14 +18,14 @@ fi
 if [ "$1" == "--predict" ]; then
     # Prediction-only mode
     if [ ! -f "stage2_ambivalent_best.pt" ] || [ ! -f "stage2_nonreply_best.pt" ]; then
-        echo "ERROR: Stage 2 models not found. Train first: python3 train_hierarchical_stage2.py"
+        echo "ERROR: Stage 2 models not found. Train first: python3 training/train_hierarchical_stage2.py"
         exit 1
     fi
-    python3 predict_hierarchical_evasion.py
+    python3 evaluation/predict_hierarchical_evasion.py
 else
     # Full pipeline: train + predict
-    python3 train_hierarchical_stage2.py
-    python3 predict_hierarchical_evasion.py
+    python3 training/train_hierarchical_stage2.py
+    python3 evaluation/predict_hierarchical_evasion.py
 fi
 
 echo "Done. Submit submission_hierarchical.zip to Codabench (Subtask 2)."

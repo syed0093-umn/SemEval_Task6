@@ -11,7 +11,7 @@ python3 data_augmentation/generate_evasion_data.py \
 
 # Step 2: Train DeBERTa-base on augmented data
 echo "Training DeBERTa-v3-base on augmented data..."
-python3 train_deberta_evasion_augmented.py \
+python3 training/train_deberta_evasion_augmented.py \
     --data_dir ./QEvasion_evasion_augmented \
     --learning_rate 3e-5 \
     --batch_size 8 \
@@ -23,6 +23,6 @@ python3 train_deberta_evasion_augmented.py \
 
 # Step 3: Generate eval predictions
 echo "Generating eval predictions..."
-python3 predict_eval_evasion_augmented.py
+python3 evaluation/predict_eval_evasion_augmented.py
 
 echo "Pipeline complete. Upload submission_eval_evasion_augmented.zip to Codabench (Subtask 2)."

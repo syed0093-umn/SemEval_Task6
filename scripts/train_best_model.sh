@@ -5,7 +5,7 @@
 python3 -c "import torch; print(f'CUDA: {torch.cuda.is_available()}, GPU: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else \"None\"}')"
 
 # Train
-python3 train_deberta_improved.py \
+python3 training/train_deberta_improved.py \
   --learning_rate 3e-5 \
   --batch_size 8 \
   --gradient_accumulation_steps 4 \
@@ -26,6 +26,6 @@ if [ $? -eq 0 ]; then
     echo "Submission created: submission_deberta_improved.zip"
 else
     echo "ERROR: Training failed."
-    echo "If OOM, try: python3 train_deberta_improved.py --batch_size 4 --gradient_accumulation_steps 8 --learning_rate 3e-5"
+    echo "If OOM, try: python3 training/train_deberta_improved.py --batch_size 4 --gradient_accumulation_steps 8 --learning_rate 3e-5"
     exit 1
 fi

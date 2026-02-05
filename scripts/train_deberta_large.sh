@@ -4,7 +4,7 @@
 # Check GPU memory
 python3 -c "import torch; print(f'GPU Memory: {torch.cuda.get_device_properties(0).total_mem / 1e9:.1f} GB') if torch.cuda.is_available() else print('No GPU available')" 2>/dev/null
 
-python3 train_deberta_improved.py \
+python3 training/train_deberta_improved.py \
   --learning_rate 2e-5 \
   --batch_size 4 \
   --gradient_accumulation_steps 8 \

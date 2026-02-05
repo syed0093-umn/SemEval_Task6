@@ -17,7 +17,7 @@ if [ -n "$TRANSFORMERS_VERSION" ]; then
     fi
 fi
 
-python3 train_modernbert_clarity.py \
+python3 training/train_modernbert_clarity.py \
     --model_size large \
     --learning_rate 2e-5 \
     --batch_size 8 \
